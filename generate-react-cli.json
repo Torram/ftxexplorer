@@ -18,7 +18,7 @@
     },
     "page": {
       "customTemplates": {
-        "component": "templates/page/component.js",
+        "component": "templates/page/TemplateName.js",
         "style": "templates/page/style.scss",
         "test": "templates/page/test.js"
       },
@@ -30,7 +30,7 @@
     },
     "layout":{
       "customTemplates": {
-        "component": "templates/component/component.js",
+        "component": "templates/component/TemplateName.js",
         "style": "templates/component/style.scss",
         "test": "templates/component/test.js"
       },
