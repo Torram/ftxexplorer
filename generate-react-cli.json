@@ -7,7 +7,7 @@
     "default": {
       "customTemplates": {
         "component": "templates/default/TemplateName.js",
-        "style": "templates/default/TemplateName.style.scss",
+        "style": "templates/default/TemplateName.scss",
         "test": "templates/default/TemplateName.test.js"
       },
       "path": "src/components",
@@ -19,8 +19,8 @@
     "page": {
       "customTemplates": {
         "component": "templates/page/TemplateName.js",
-        "style": "templates/page/style.scss",
-        "test": "templates/page/test.js"
+        "style": "templates/page/TemplateName.scss",
+        "test": "templates/page/TemplateName.test.js"
       },
       "path": "src/pages",
       "withLazy": false,
@@ -31,8 +31,8 @@
     "layout":{
       "customTemplates": {
         "component": "templates/component/TemplateName.js",
-        "style": "templates/component/style.scss",
-        "test": "templates/component/test.js"
+        "style": "templates/component/TemplateName.scss",
+        "test": "templates/component/TemplateName.test.js"
       },
       "path": "src/layout",
       "withLazy": false,
