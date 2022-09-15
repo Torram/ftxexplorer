@@ -2,25 +2,28 @@
 Component: src/pages/HomePage/HomePage.js
 */
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './HomePage.scss';
 import {Link} from 'react-router-dom';
 import Collection from '../../components/Collection/Collection';
 
 const HomePage = (props) => {
+
+    const [collections, setCollections] = useState({});
+    console.log(Object.keys(collections).length)
     useEffect(() => {
         const collections = async () => {
-          try{
+              let coll;
               await fetch("https://ftx.com/api/nft/collections")
-              .then((response)=> response.json())
-              .then((collections)=> collections)
-          }
-          catch (error){
-              console.log(error);
-          }
+              .then(async (response)=> await response.json())
+              .then((collections)=>coll=collections)
+              .catch((error)=>console.log(error))
+              console.log(coll.result);
+              return coll;
         }
-        const coll=collections();
-        console.log(coll)
+        const coll = collections();
+
+        console.log(coll);
       }, [])
       
     return (

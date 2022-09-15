@@ -9,14 +9,18 @@ import { Link } from "react-router-dom";
 const Header = (props) => {
   return (
     <header id='main' className="Header">
-      <nav >
+      <nav className="nav">
         <h3>
-          <Link to='/'>
-            <p>FTS US NFT EXPLORER</p>
-          </Link>
-        </h3>
+            <Link to='/'>
+              FTS US NFT EXPLORER
+            </Link>
+          </h3>
+        <ul>
+          <li>
+            <Link to='/collections'>Collections</Link>
+          </li>
+        </ul>
       </nav>
-
     </header>
   )
 };

@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Redirect, Routes } from "react-router-d
 import "./App.css";
 import Header from "./layout/Header/Header";
 import HomePage from "./pages/HomePage/HomePage";
+import Collections from "./pages/Collections/Collections";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<HomePage />} />
           <Route exact path="/home" element={<HomePage/>} />
+          <Route exact path="/collections" element={<Collections/>}/>
         </Routes>
       </Router>
     </div>

@@ -13,7 +13,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "set HTTPS=true SSL_CRT_FILE={localhost}.pem SSL_KEY_FILE={localhost-key}.pem && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -58,7 +58,7 @@
     "prettier": "2.7.1",
     "prettier-eslint": "15.0.1",
     "prettier-eslint-cli": "7.1.0",
-    "react-router-dom": "^6.3.0",
+    "react-router-dom": "^6.4.0",
     "react-test-renderer": "^18.2.0",
     "scss-loader": "^0.0.1"
   }
