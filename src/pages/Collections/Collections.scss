@@ -7,11 +7,24 @@
     color: #fff;
 }
 .tools{
-    flex: 1;
+    padding-left: 2em;
     display:flex;
-    align-items: center;
     width: 100%;
     max-height: min-content;
     color: #FFFFFF;
     background-color: #000000;
+  }
+  .tools select{
+    margin-left: 2em;
+  }
+  .ul{
+    display: flex;
+    list-style: none;
+}
+  .ul a:visited{
+    color: deepskyblue;
+  }
+
+  .ul li{
+    margin: 1em;
   }

@@ -1,5 +1,5 @@
 import React from 'react'
-import './Container.css'
+import './Container.scss'
 import Item from '../item/Item';
 
 const Container = ({

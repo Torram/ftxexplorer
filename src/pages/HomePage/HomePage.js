@@ -38,7 +38,7 @@ const HomePage = (props) => {
       }, []);
       
     return (
-        <div className='' width="100%">
+        <div className='homepage'>
             
         </div>
     )

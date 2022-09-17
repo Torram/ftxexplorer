@@ -13,25 +13,26 @@ const Collections = (props) => {
     const [result, setResult] = useState([]);
     const {count, page} = useParams();
     const [countState, setCountState] = useState(count);
+    const [currentPage, setCurrentPage] = useState(page);
     const first = parseInt(count)*parseInt(page)-parseInt(count);
     const last = first + parseInt(count);
-    const pages = parseInt(count) / parseInt(page);
-    
-    const collectionsFiltered = async (count, page) => {
-        let collAll = JSON.parse(localStorage.getItem('collections'));
+    const [pagination, setPagination] = useState([]);
+
+    const collectionsFiltered = async () => {
         let filtered = [];
-        let lista = [];
+        let list = [];
         await fetch(`https://ftx.com/api/nft/collection_names?startInclusive=${first}&endExclusive=${last}`)
             .then(async(response)=>await response.json())
             .then(async (data)=>{filtered=data.result})
             .catch((error)=>console.log(error));
             setResult(filtered);
+            pages(filtered.total)
         if(filtered){
             filtered.collections.map((element)=>{
-                lista.push("https://ftx.com/api/nft/example_nft?collection="+element)});
+                list.push("https://ftx.com/api/nft/example_nft?collection="+element)});
             filtered = [];
             }
-        lista.map(async(element)=>{
+        list.map(async(element)=>{
             await fetch(element)
             .then(async(response)=>await response.json())
             .then((data)=>filtered.push(data.result))
@@ -39,8 +40,36 @@ const Collections = (props) => {
         });
         if(Object.keys(collections).length===0)
             setCollections(filtered);
+        
     }
     
+    const pages = (total) =>{
+        const pages = Math.ceil(total/count);
+        let list=[];
+        const pag = parseInt(page);
+
+        if(pag<=5){
+            console.log("ASD",pag+5)
+            for(let i=1;i<=(pag+5);i++){
+                list.push(i)
+            }
+            list.push(pages);
+        }
+        else if(pag>5&&pag<pages-5){
+            list.push("1");
+            for(let i=pag-5;i<pag+5;i++){
+                list.push(i)
+            }
+            list.push(pages);
+        }
+        else if(pag>=pages-5){
+            list.push("1");
+            for(let i=pag-5;i<=pages;i++){
+                list.push(i.toString());
+            }
+        }
+        setPagination(list);
+    }
     const changeCount = (e) => {
         setCountState(e.target.value);
         navigate("/collections/"+ e.target.value+"/1")
@@ -50,16 +79,16 @@ const Collections = (props) => {
       if(Object.keys(collections).length===0){
         collectionsFiltered(count,page)
       }
-        if(countState != count){
-            collectionsFiltered(countState,page)
+        if(currentPage !== page){
+            window.location.reload();
         }
-    }, [collections, countState])
+    }, [collections, countState, page])
     
     return (
         <div className = "collections">
             <div className='tools'>
                 <h2>
-                    {first} - {last} of {result?result.total:"0"}
+                    {first?first:1} - {last} of {result?result.total:"0"}
                 </h2>
                 <div>
                     <select value={count} onChange={changeCount}>
@@ -68,9 +97,19 @@ const Collections = (props) => {
                         <option key="2" value="100">100 per page</option>
                     </select>
                 </div>
-                <ul>
+                <ul className='ul'>
                     <li>
-                        <Link to={"/"+count+"/"+page-1}>0</Link>
+                        <Link to={"/collections/"+count+"/"+(parseInt(page)-1)} key={Math.random()}>{"<<"}</Link>
+                    </li>
+                    {pagination.length>0?pagination.map((row,index)=>{
+                        
+                        return (
+                        <li key={index}>
+                            <Link to={"/collections/"+count+"/"+row}>{row}</Link>
+                        </li>)
+                    }):""}
+                    <li>
+                        <Link to={"/collections/"+count+"/"+(parseInt(page)+1)} key={Math.random()}>{">>"}</Link>
                     </li>
                 </ul>
             </div>
