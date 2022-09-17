@@ -1,11 +1,11 @@
 import React from "react";
 import {shallow} from 'enzyme';
-import Collection from './Collection'
+import Footer from './Footer'
 
-describe ('<Collection />', () => {
+describe ('<Footer />', () => {
     let component;
     beforeEach(() => {
-        component = shallow(<Collection />)
+        component = shallow(<Footer />)
     });
 
     test('It should mount', ()=>{

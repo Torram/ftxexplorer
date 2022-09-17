@@ -1,8 +1,9 @@
-.Collections {
+.Collection {
     font-family: 'Open Sans', sans-serif;
     font-weight: 700;
     width: 100%;
-    display:flex;
+    justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
     color: #fff;
 }

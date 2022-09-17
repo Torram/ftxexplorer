@@ -4,34 +4,43 @@ Component: src/pages/HomePage/HomePage.js
 
 import React, { useEffect, useState } from 'react';
 import './HomePage.scss';
-import {Link} from 'react-router-dom';
-import Collection from '../../components/Collection/Collection';
+import Container from '../../components/container/Container';
+
 
 const HomePage = (props) => {
-
+    let col={};
     const [collections, setCollections] = useState({});
-    console.log(Object.keys(collections).length)
-    useEffect(() => {
-        const collections = async () => {
-              let coll;
-              await fetch("https://ftx.com/api/nft/collections")
-              .then(async (response)=> await response.json())
-              .then((collections)=>coll=collections)
-              .catch((error)=>console.log(error))
-              console.log(coll.result);
-              return coll;
+    
+    const collectionsAll = async () => {
+        let coll={};
+        await fetch("https://ftx.com/api/nft/collections")
+        .then(async(response)=> await response.json())
+        .then((collections)=>{coll=collections
+              localStorage.setItem('collections',JSON.stringify(collections.result))})
+        .catch((error)=>console.log(error))
+        if(coll.success){
+          setCollections(coll.result)
+          return coll.result;
         }
-        const coll = collections();
+    }
 
-        console.log(coll);
-      }, [])
+    useEffect(() => {
+        
+        col = localStorage.getItem('collections');
+        if(col===null){
+            const coll = collectionsAll();
+            setCollections(coll);
+        }
+        else{
+            //localStorage.clear()
+            setCollections(JSON.parse(col))
+        }
+      }, []);
       
     return (
-        <div className='' width="50%">
-            <Collection imageURL="https://static.ftx.com/nfts/424117991083479195.jpg" collection="MEXICO"/>
-        </div>
+        <div className='' width="100%">
             
-        
+        </div>
     )
 }
 export default HomePage; 
