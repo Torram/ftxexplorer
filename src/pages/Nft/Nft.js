@@ -4,7 +4,7 @@ Component: src/pages/Nft/Nft.js
 
 import React, { useEffect, useState } from 'react';
 import './Nft.scss';
-import {Link, RouteComponentProps, useParams} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 
 const Nft = (props) => {
     const {id} = useParams();
@@ -30,8 +30,7 @@ const Nft = (props) => {
             getNft();
         }else if(Object.keys(bids).length===0)
             getBids(); 
-        
-    }, [nft])
+    }, [nft, bids])
     
     return (
         <div className = "Nft">

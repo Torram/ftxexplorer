@@ -7,7 +7,6 @@ import "./Header.scss";
 import { Link, useNavigate } from "react-router-dom";
 
 const Header = (props) => {
-  let col = {};
   const navigate = useNavigate();
   const [collections, setCollections] = useState({});
     
@@ -25,7 +24,7 @@ const Header = (props) => {
 }
 
   const collectionSearch = (e) =>{
-    if(e.key=='Enter')
+    if(e.key==='Enter')
       if(collections.find((element=>e.target.value===element.collection)))
         navigate(`/collections/${e.target.value}`)
       else
@@ -33,6 +32,7 @@ const Header = (props) => {
   }
   
   useEffect(() => {
+    let col = {};
     col = localStorage.getItem('collections');
     if(col===null){
         const coll = collectionsAll();
@@ -41,7 +41,6 @@ const Header = (props) => {
     else if(col!==null&&Object.keys(collections).length===0){
         //localStorage.clear()
         setCollections(JSON.parse(col))
-
     }
   }, [collections]);
 
@@ -53,6 +52,7 @@ const Header = (props) => {
             <h1>FTXEXPLORER</h1>
           </Link>
         </div>
+        {console.log(JSON.parse(localStorage.getItem('collections')))}
         <div className="navbar-links_container">
           <input type="text" list="collections" placeholder='Search Collection Here' onKeyDown={collectionSearch}/>
           <datalist id="collections">

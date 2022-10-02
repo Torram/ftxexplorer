@@ -13,7 +13,7 @@ const Collections = (props) => {
     const [result, setResult] = useState([]);
     const {count, page} = useParams();
     const [countState, setCountState] = useState(count);
-    const [currentPage, setCurrentPage] = useState(page);
+    const [currentPage, ] = useState(page);
     const first = parseInt(count)*parseInt(page)-parseInt(count);
     const last = first + parseInt(count);
     const [pagination, setPagination] = useState([]);
@@ -28,7 +28,7 @@ const Collections = (props) => {
             setResult(filtered);
             pages(filtered.total)
         if(filtered){
-            filtered.collections.map((element)=>{
+            filtered.collections.forEach((element)=>{
                 list.push("https://ftx.com/api/nft/example_nft?collection="+element)});
             filtered = [];
             }
@@ -75,6 +75,7 @@ const Collections = (props) => {
         navigate("/collections/"+ e.target.value+"/1")
         window.location.reload();
     }
+
     useEffect(() => {
       if(Object.keys(collections).length===0){
         collectionsFiltered(count,page)
@@ -82,7 +83,7 @@ const Collections = (props) => {
         if(currentPage !== page){
             window.location.reload();
         }
-    }, [collections, countState, page])
+    }, [collections, countState, page, count, currentPage])
     
     return (
         <div className = "collections">
